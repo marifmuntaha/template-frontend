@@ -9,7 +9,8 @@ import TableCharts from './Components/TableCharts'
 import Device from "@/pages/dashboard/Analytics/Components/Device.tsx";
 import Information from "@/pages/dashboard/Analytics/Components/Information.tsx";
 import Timestamp from "@/pages/dashboard/Analytics/Components/Timestamp.tsx";
-import Member from "@/pages/dashboard/Analytics/Components/Member.tsx";
+import Member from "@/pages/dashboard/Analytics/Components/Member";
+import Log from "@/pages/dashboard/Analytics/Components/Log.tsx";
 
 const Analytics = () => {
     return (
@@ -29,7 +30,10 @@ const Analytics = () => {
 					<Member/>
 				</div>
 				<div className="xl:col-span-4 col-span-12">
-					<SessionsOverview/>
+					<div className="grid xl:grid-cols-1 lg:grid-cols-1 grid-cols-1 gap-6 mb-6">
+						<Log/>
+						<Log/>
+					</div>
 				</div>
 			</div>
 

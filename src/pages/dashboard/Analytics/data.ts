@@ -1,4 +1,5 @@
 import {ApexOptions} from "apexcharts";
+import moment from "moment";
 
 export interface TableRecord {
 	id: number
@@ -1044,13 +1045,18 @@ const dataSet: any = [[], []]
 
 for (let i = 0; i < 12; i++) {
 	ts1 = ts1 + 86400000
-	const innerArr = [ts1, dataSeries[2][i].value]
+	const innerArr = [ts1, dataSeries[0][i].value]
 	dataSet[0].push(innerArr)
 }
 for (let i = 0; i < 12; i++) {
 	ts2 = ts2 + 86400000
 	const innerArr = [ts2, dataSeries[1][i].value]
 	dataSet[1].push(innerArr)
+}
+const categories: string[] = [];
+const updateCategory = (date: any) => {
+	const category = moment(date).format("HH:mm:ss").toString()
+	categories.push(category);
 }
 export const irregularTimeSeriesOpts: ApexOptions = {
 	chart: {
@@ -1105,7 +1111,7 @@ export const irregularTimeSeriesOpts: ApexOptions = {
 			// },
 			offsetX: 0,
 			formatter: function (val: any) {
-				return (val / 1000000).toFixed(0)
+				return (val).toFixed(0)
 			},
 		},
 		axisBorder: {
@@ -1116,7 +1122,7 @@ export const irregularTimeSeriesOpts: ApexOptions = {
 		},
 	},
 	xaxis: {
-		type: 'datetime',
+		type: 'category',
 		tickAmount: 8,
 		labels: {
 			// formatter: function ( val:string)  {
@@ -1125,6 +1131,7 @@ export const irregularTimeSeriesOpts: ApexOptions = {
 			//     }.replace(/ /g, '-'))
 			// }
 		},
+		categories: categories
 	},
 	title: {
 		text: 'Lalu lintas',
@@ -1133,11 +1140,11 @@ export const irregularTimeSeriesOpts: ApexOptions = {
 	},
 	tooltip: {
 		shared: true,
-		y: {
-			formatter: function (val: any) {
-				return (val / 1000000).toFixed(0) + ' points'
-			},
-		},
+		// y: {
+		// 	formatter: function (val: any) {
+		// 		return (val / 1000000).toFixed(0) + ' points'
+		// 	},
+		// },
 	},
 	legend: {
 		position: 'top',
